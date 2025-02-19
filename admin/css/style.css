@@ -1,0 +1,214 @@
+#e-admin-top-bar-root,
+.notice {
+    display: none!important;
+}
+#wpbody-content {
+    margin-block-start: 0!important;
+}
+.wrap {
+    padding-block-start: 0!important;   
+}
+th {
+    text-align: left;
+}
+.go-sites * {
+    box-sizing: border-box;
+}
+.sites-llst {
+    margin-top: 40px;
+    width: 100%;
+    max-width: 490px;
+}
+
+.go-sites {
+    margin: 0 auto;
+}
+
+.add-new-site-form button {
+    background-color: #001D6C!important;
+    border-color: #001D6C!important;
+    color: #fff!important;
+    border-radius: 100px!important;
+}
+.add-new-site-form button:hover {
+    background-color: #1d41f1!important;
+    border-color: #1d41f1!important;
+    color: #fff!important;
+}
+
+.go-sites,
+.site-item,
+.site-list {
+    position: relative;
+    width: 100%;
+    max-width: 850px;
+}
+.site-item {    
+    display: grid;
+    grid-template-columns: 250px 1fr 67px;
+    border: solid 1px #ebebeb;
+    padding: 10px;
+    background-color: #fff;
+}
+.site-item::after,
+.site-list::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+    background-image: url(./loading.gif);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 40px;
+    display: none;
+}
+.site-item.loading::after,
+.site-list.loading::after {
+    display: block;
+}
+.site-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 5;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: grayscale(100);
+    background-color: rgba(255, 255, 255, 0.5);
+    display: none;
+}
+.site-item:not(.add-new-site-form).disabled::before {
+    display: block;
+}
+.site-item:not(:last-child):not(.add-new-site-form) {
+    border-bottom: none;
+}
+.site-item .col {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+.site-item.header {
+    margin-top: 20px;
+}
+.site-item.header .col {
+    padding: 0 10px;
+}
+.site-item input {
+    width: 100%;
+}
+.site-item .field {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;    
+}
+.site-item .action .field {
+    align-items: flex-end;
+}
+.site-item .token-con {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 5px;
+}
+.site-item .action {
+    padding-right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+.site-item .token {
+    position: relative;
+    word-break: break-all;
+    cursor: pointer;
+}
+.site-item .token::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: calc(100% + 2px);
+    height: calc(100% + 2px);
+    border: dotted 1px #00c518;;
+    border-radius: 5px;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.5s ease-in-out;
+}
+.site-item .token:hover::after {
+    visibility: visible;
+    opacity: 1;
+}
+.site-item .domain {
+    font-size: 18px;
+}
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 20px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 4px;
+  bottom: 2px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #00c518;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #00c518;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(16px);
+  -ms-transform: translateX(16px);
+  transform: translateX(16px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
