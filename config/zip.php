@@ -12,8 +12,13 @@ define('GROWTH_OPTIMIZER_PLUGINS_REPO', ABSPATH . REPO_FOLDER);
  */
 function go_generate_plugin_zip( $plugin ) {
 
-    $folderPath = GROWTH_OPTIMIZER_PLUGINS_REPO;
-    $zipFile    = GROWTH_OPTIMIZER_PLUGINS_REPO . "/{$plugin}.zip";
+    $target_file     = "/{$plugin}.zip";
+    $folderPath      = GROWTH_OPTIMIZER_PLUGINS_REPO;
+    $zipFile         = GROWTH_OPTIMIZER_PLUGINS_REPO . $target_file;
+    $plugin_file_url = home_url(REPO_FOLDER.$target_file);
+
+    # If file exist no need to generate
+    if (file_exists($zipFile)) return $plugin_file_url;
 
     # Create a new ZipArchive instance
     $zip = new ZipArchive();
@@ -43,7 +48,7 @@ function go_generate_plugin_zip( $plugin ) {
         $zip->close();
 
         # Return plugin zip file url
-        return home_url(REPO_FOLDER."/{$plugin}.zip");
+        return $plugin_file_url;
     }
     return '';
 }
