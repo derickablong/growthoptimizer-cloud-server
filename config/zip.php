@@ -13,9 +13,13 @@ define('GROWTH_OPTIMIZER_PLUGINS_REPO', ABSPATH . REPO_FOLDER);
 function go_generate_plugin_zip( $plugin ) {
 
     $target_file     = "/{$plugin}.zip";
-    $folderPath      = GROWTH_OPTIMIZER_PLUGINS_REPO;
+    $folder_path     = GROWTH_OPTIMIZER_PLUGINS_REPO;
     $zipFile         = GROWTH_OPTIMIZER_PLUGINS_REPO . $target_file;
     $plugin_file_url = home_url(REPO_FOLDER.$target_file);
+
+    # If folder repo not exist, create
+    if (!file_exists($folder_path))
+        mkdir($folder_path, 0777, true);
 
     # If file exist no need to generate
     if (file_exists($zipFile)) return $plugin_file_url;
@@ -28,7 +32,7 @@ function go_generate_plugin_zip( $plugin ) {
         
         # Create a recursive directory iterator
         $iterator = new RecursiveIteratorIterator(
-            new RecursiveDirectoryIterator($folderPath),
+            new RecursiveDirectoryIterator($folder_path),
             RecursiveIteratorIterator::LEAVES_ONLY
         );
 
@@ -37,7 +41,7 @@ function go_generate_plugin_zip( $plugin ) {
             if (!$file->isDir()) {
                 # Get the relative path of the file inside the zip
                 $filePath = $file->getRealPath();
-                $relativePath = substr($filePath, strlen($folderPath) + 1); # Removing the folder path
+                $relativePath = substr($filePath, strlen($folder_path) + 1); # Removing the folder path
 
                 # Add the file to the zip
                 $zip->addFile($filePath, $relativePath);
