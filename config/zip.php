@@ -9,25 +9,26 @@ abstract class GO_Zip
      * @param array $plugins
      * @return void
      */
-    function generate( $plugins ) {
+    function generate( $plugins ) {        
         foreach ($plugins as $plugin => $settings) {
 
             $target_file = "/{$plugin}.zip";
             $folder_path = GROWTH_OPTIMIZER_PLUGINS_REPO;
-            $zipFile     = GROWTH_OPTIMIZER_PLUGINS_REPO . $target_file;
+            $zip_file    = GROWTH_OPTIMIZER_PLUGINS_REPO . $target_file;
+            
 
             # If folder repo not exist, create
             if (!file_exists($folder_path))
                 mkdir($folder_path, 0777, true);
-
+                
             # If file exist no need to generate
-            if (file_exists($zipFile)) return;
-
+            if (file_exists($zip_file)) continue;
+            
             # Create a new ZipArchive instance
             $zip = new ZipArchive();
 
             # Open the zip file for writing
-            if ($zip->open($zipFile, ZipArchive::CREATE | ZipArchive::OVERWRITE) === TRUE) {
+            if ($zip->open($zip_file, ZipArchive::CREATE | ZipArchive::OVERWRITE) === TRUE) {
                 
                 # Create a recursive directory iterator
                 $iterator = new RecursiveIteratorIterator(
