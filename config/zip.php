@@ -10,16 +10,18 @@ abstract class GO_Zip
      * @return void
      */
     function generate( $plugins ) {        
+
+        # Folder path
+        $folder_path = GROWTH_OPTIMIZER_PLUGINS_REPO;
+
+        # If folder repo not exist, create
+        if (!file_exists($folder_path))
+        mkdir($folder_path, 0777, true);
+
         foreach ($plugins as $plugin => $settings) {
 
-            $target_file = "/{$plugin}.zip";
-            $folder_path = GROWTH_OPTIMIZER_PLUGINS_REPO;
+            $target_file = "/{$plugin}.zip";            
             $zip_file    = GROWTH_OPTIMIZER_PLUGINS_REPO . $target_file;
-            
-
-            # If folder repo not exist, create
-            if (!file_exists($folder_path))
-                mkdir($folder_path, 0777, true);
                 
             # If file exist no need to generate
             if (file_exists($zip_file)) continue;
