@@ -1,6 +1,6 @@
 <?php
 
-class GO_Zip
+abstract class GO_Zip
 {
     /**
      * Generate plugin zip file
@@ -9,7 +9,7 @@ class GO_Zip
      * @param array $plugins
      * @return void
      */
-    public function generate( $plugins ) {
+    function generate( $plugins ) {
         foreach ($plugins as $plugin => $settings) {
 
             $target_file = "/{$plugin}.zip";
