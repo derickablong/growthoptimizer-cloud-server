@@ -69,11 +69,21 @@ class Growth_Optimizer_Template_Cloud_API extends GO_Zip
         $this->cloud_url          = $cloud_url;
         $this->cloud_sites_option = $cloud_sites_option;
         $this->plugins            = $plugins;
+    }
+
+
+    /**
+     * Let's generate plugin gip files
+     * 
+     * @return void
+     */
+    public function start()
+    {
+        # Start the system configuration
+        $this->actions();
 
         # Generate plugin zip file
         $this->generate($this->plugins);
-        # Start the system configuration
-        $this->init();
     }
 
 
@@ -81,7 +91,7 @@ class Growth_Optimizer_Template_Cloud_API extends GO_Zip
      * Register actions
      * @return void
      */
-    private function init()
+    private function actions()
     {
         # Create database table
         add_action('admin_init', [$this, 'wp_table']);
@@ -818,7 +828,7 @@ class Growth_Optimizer_Template_Cloud_API extends GO_Zip
 }
 
 # Start the cloud server API
-new Growth_Optimizer_Template_Cloud_API(
+$go_template_cloud_api = new Growth_Optimizer_Template_Cloud_API(
     GROWTH_OPTIMIZER_TITLE,
     GROWTH_OPTIMIZER_SLUG,
     GROWTH_OPTIMIZER_CLOUD_DIR,
@@ -826,3 +836,5 @@ new Growth_Optimizer_Template_Cloud_API(
     GROWTH_OPTIMIZER_SITES,
     GROWTH_OPTIMIZER_PLUGINS
 );
+# Let's start the cloud api
+$go_template_cloud_api->start();

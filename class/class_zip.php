@@ -2,6 +2,10 @@
 
 abstract class GO_Zip
 {
+
+    # Must be implemented by the subclass
+    abstract public function start();
+
     /**
      * Generate plugin zip file
      * according to plugin configuration
@@ -9,8 +13,8 @@ abstract class GO_Zip
      * @param array $plugins
      * @return void
      */
-    function generate( $plugins ) {        
-
+    public function generate( $plugins ) {        
+        
         # Folder path
         $folder_path = GROWTH_OPTIMIZER_PLUGINS_REPO;
 
