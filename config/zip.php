@@ -21,7 +21,7 @@ abstract class GO_Zip
         foreach ($plugins as $plugin => $settings) {
 
             $target_file = "/{$plugin}.zip";            
-            $zip_file    = GROWTH_OPTIMIZER_PLUGINS_REPO . $target_file;
+            $zip_file    = $folder_path . $target_file;
                 
             # If file exist no need to generate
             if (file_exists($zip_file)) continue;
