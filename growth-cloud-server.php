@@ -13,22 +13,31 @@
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly.
+	exit; # Exit if accessed directly.
 }
 
-// If plugin - 'Elementor' not exist then return.
+# If plugin - 'Elementor' not exist then return.
 if ( ! class_exists( '\Elementor\Plugin' ) ) {
 	return;
 }
 
-
+# Constant variables
 define('GROWTH_OPTIMIZER_TITLE', 'GO Sites');
 define('GROWTH_OPTIMIZER_SLUG', 'go-sites');
 define('GROWTH_OPTIMIZER_CLOUD_DIR', plugin_dir_path( __FILE__ ));
 define('GROWTH_OPTIMIZER_CLOUD_URL', plugin_dir_url( __FILE__ ));
 define('GROWTH_OPTIMIZER_SITES', 'growth_optimizer_cloud_sites');
 
-class Growth_Optimizer_Template_Cloud_API
+# Plugins repository
+define('REPO_FOLDER', 'required-plugin');
+define('GROWTH_OPTIMIZER_PLUGINS_REPO', ABSPATH . REPO_FOLDER);
+
+# Zip generator
+require_once( GROWTH_OPTIMIZER_CLOUD_DIR . 'config/zip.php' );
+# Config for cloud plugins
+require_once( GROWTH_OPTIMIZER_CLOUD_DIR . 'config/plugins.php' );
+
+class Growth_Optimizer_Template_Cloud_API extends GO_Zip
 {
 
     # Title
@@ -61,6 +70,9 @@ class Growth_Optimizer_Template_Cloud_API
         $this->cloud_sites_option = $cloud_sites_option;
         $this->plugins            = $plugins;
 
+        # Generate plugin zip file
+        $this->generate($this->plugins);
+        # Start the system configuration
         $this->init();
     }
 
@@ -804,11 +816,6 @@ class Growth_Optimizer_Template_Cloud_API
     }
 
 }
-
-# Zip generator
-require_once( GROWTH_OPTIMIZER_CLOUD_DIR . 'config/zip.php' );
-# Config for cloud plugins
-require_once( GROWTH_OPTIMIZER_CLOUD_DIR . 'config/plugins.php' );
 
 # Start the cloud server API
 new Growth_Optimizer_Template_Cloud_API(
