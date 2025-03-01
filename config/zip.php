@@ -34,7 +34,7 @@ abstract class GO_Zip
             if ($zip->open($zip_file, ZipArchive::CREATE | ZipArchive::OVERWRITE) === TRUE) {
                 
                 # Plugin folder path
-                $plugin_folder_path = ABSPATH . "/wp-content/plugins/{$plugin}";
+                $plugin_folder_path = ABSPATH . "wp-content/plugins/{$plugin}";
 
                 # Create a recursive directory iterator
                 $iterator = new RecursiveIteratorIterator(
