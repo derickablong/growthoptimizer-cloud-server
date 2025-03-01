@@ -1,7 +1,7 @@
 <?php
 
 # Plugins repository
-define('REPO_FOLDER', '/required-plugins');
+define('REPO_FOLDER', 'required-plugin');
 define('GROWTH_OPTIMIZER_PLUGINS_REPO', ABSPATH . REPO_FOLDER);
 
 /**
