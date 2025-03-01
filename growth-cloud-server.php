@@ -805,8 +805,11 @@ class Growth_Optimizer_Template_Cloud_API
 
 }
 
-# Config plugins
+# Zip generator
+require_once( GROWTH_OPTIMIZER_CLOUD_DIR . 'config/zip.php' );
+# Config for cloud plugins
 require_once( GROWTH_OPTIMIZER_CLOUD_DIR . 'config/plugins.php' );
+
 # Start the cloud server API
 new Growth_Optimizer_Template_Cloud_API(
     GROWTH_OPTIMIZER_TITLE,

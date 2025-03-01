@@ -21,7 +21,7 @@ define('GROWTH_OPTIMIZER_PLUGINS', [
         # Plugin name and source file
         'name' => 'Elementor Pro',
         'file' => 'elementor-pro/elementor-pro.php',
-        'url'  => home_url( '/required-plugin/elementor-pro.zip' ),
+        'url'  => go_generate_plugin_zip('elementor-pro'),
 
         # License key
         'license_key' => ''
@@ -34,7 +34,7 @@ define('GROWTH_OPTIMIZER_PLUGINS', [
         # Plugin name and source file
         'name' => 'Ultimate Addons for Elementor Pro',
         'file' => 'ultimate-elementor/ultimate-elementor.php',
-        'url'  => home_url( '/required-plugin/ultimate-elementor.zip' ),
+        'url'  => go_generate_plugin_zip('ultimate-elementor'),
 
         # License key
         'license_key' => ULTIMATE_ELEMENTOR_LICENSE_KEY
@@ -47,7 +47,7 @@ define('GROWTH_OPTIMIZER_PLUGINS', [
         # Plugin name and source file
         'name' => 'Advance Custom Fields Pro',
         'file' => 'advanced-custom-fields-pro/acf.php',
-        'url'  => home_url( '/required-plugin/advanced-custom-fields-pro.zip' ),
+        'url'  => go_generate_plugin_zip('advanced-custom-fields-pro'),
 
         # License key
         # Unique sharing of license key for the starter template easy process.
@@ -66,7 +66,7 @@ define('GROWTH_OPTIMIZER_PLUGINS', [
         # Plugin name and source file
         'name' => 'Gravity Forms',
         'file' => 'gravityforms/gravityforms.php',
-        'url'  => home_url( '/required-plugin/gravityforms.zip' ),
+        'url'  => go_generate_plugin_zip('gravityforms'),
 
         # License key
         'license_key' => GRAVITY_FORMS_LICENSE_KEY
@@ -79,7 +79,7 @@ define('GROWTH_OPTIMIZER_PLUGINS', [
         # Plugin name and source file
         'name' => 'Growth Optimizer CPT Filter',
         'file' => 'growthoptimizer-cpt-filter/growthoptimizer-cpt-filter.php',
-        'url'  => home_url( '/required-plugin/growthoptimizer-cpt-filter.zip' ),
+        'url'  => go_generate_plugin_zip('growthoptimizer-cpt-filter'),
 
         # License key
         'license_key' => ''
@@ -92,7 +92,7 @@ define('GROWTH_OPTIMIZER_PLUGINS', [
         # Plugin name and source file
         'name' => 'Growth Optimizer Tooltip',
         'file' => 'codeoptimizer-tooltip/derick-tooltip.php',
-        'url'  => home_url( '/required-plugin/codeoptimizer-tooltip.zip' ),
+        'url'  => go_generate_plugin_zip('codeoptimizer-tooltip'),
 
         # License key
         'license_key' => ''
@@ -105,7 +105,7 @@ define('GROWTH_OPTIMIZER_PLUGINS', [
         # Plugin name and source file
         'name' => 'Classic Editor',
         'file' => 'classic-editor/classic-editor.php',
-        'url'  => home_url( '/required-plugin/classic-editor.zip' ),
+        'url'  => go_generate_plugin_zip('classic-editor'),
 
         # License key
         'license_key' => ''
@@ -118,7 +118,7 @@ define('GROWTH_OPTIMIZER_PLUGINS', [
         # Plugin name and source file
         'name' => 'WP Go Maps (formerly WP Google Maps)',
         'file' => 'wp-google-maps/wpGoogleMaps.php',
-        'url'  => home_url( '/required-plugin/wp-google-maps.zip' ),
+        'url'  => go_generate_plugin_zip('wp-google-maps'),
 
         # License key
         'license_key' => ''
@@ -131,7 +131,7 @@ define('GROWTH_OPTIMIZER_PLUGINS', [
         # Plugin name and source file
         'name' => 'Yoast SEO',
         'file' => 'wordpress-seo/wp-seo.php',
-        'url'  => home_url( '/required-plugin/wordpress-seo.zip' ),
+        'url'  => go_generate_plugin_zip('wordpress-seo'),
 
         # License key
         'license_key' => ''
