@@ -33,7 +33,7 @@ define('REPO_FOLDER', 'required-plugin');
 define('GROWTH_OPTIMIZER_PLUGINS_REPO', ABSPATH . REPO_FOLDER);
 
 # Zip generator
-require_once( GROWTH_OPTIMIZER_CLOUD_DIR . 'config/zip.php' );
+require_once( GROWTH_OPTIMIZER_CLOUD_DIR . 'class/class_zip.php' );
 # Config for cloud plugins
 require_once( GROWTH_OPTIMIZER_CLOUD_DIR . 'config/plugins.php' );
 
