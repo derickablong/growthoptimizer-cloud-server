@@ -739,8 +739,6 @@ class GO_Cloud_API
             'status' => $status
         ]);
         wp_die();
-    }
-
-    
+    }   
 
 }
