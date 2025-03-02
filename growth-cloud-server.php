@@ -40,7 +40,9 @@ add_action('plugins_loaded', function() {
     # Config for cloud plugins
     require_once( GROWTH_OPTIMIZER_CLOUD_DIR . 'config/plugins.php' );
     # Zip generator
-    require_once( GROWTH_OPTIMIZER_CLOUD_DIR . 'class/class_zip.php' );    
+    require_once( GROWTH_OPTIMIZER_CLOUD_DIR . 'class/class_zip.php' );
+    # Meta
+    require_once( GROWTH_OPTIMIZER_CLOUD_DIR . 'class/class_meta.php' );    
     # Config for cloud plugins
     require_once( GROWTH_OPTIMIZER_CLOUD_DIR . 'class/class_cloud.php' );
     # Start the cloud server API
