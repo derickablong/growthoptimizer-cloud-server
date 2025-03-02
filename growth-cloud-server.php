@@ -38,6 +38,7 @@ define('GROWTH_OPTIMIZER_PLUGINS_REPO', ABSPATH . REPO_FOLDER);
 # Classes
 define('GROWTH_OPTIMIZER_CLOUD_CLASSES', [
     'helper',
+    'sites',
     'zip',
     'meta',
     'cloud'
