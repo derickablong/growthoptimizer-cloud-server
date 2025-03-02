@@ -29,6 +29,7 @@ define('GROWTH_OPTIMIZER_SLUG', 'go-sites');
 define('GROWTH_OPTIMIZER_CLOUD_DIR', plugin_dir_path( __FILE__ ));
 define('GROWTH_OPTIMIZER_CLOUD_URL', plugin_dir_url( __FILE__ ));
 define('GROWTH_OPTIMIZER_SITES', 'growth_optimizer_cloud_sites');
+define('GROWTH_OPTIMIZER_DB', 'subscribed_sites');
 
 # Plugins repository
 define('REPO_FOLDER', 'required-plugin');
@@ -49,7 +50,9 @@ add_action('plugins_loaded', function() {
         GROWTH_OPTIMIZER_CLOUD_DIR,
         GROWTH_OPTIMIZER_CLOUD_URL,
         GROWTH_OPTIMIZER_SITES,
-        GROWTH_OPTIMIZER_PLUGINS
+        GROWTH_OPTIMIZER_PLUGINS,
+        GROWTH_OPTIMIZER_PLUGINS_REPO,
+        GROWTH_OPTIMIZER_DB
     );
     # Let's start the cloud api
     $go_template_cloud_api->start();

@@ -7,27 +7,42 @@ class GO_Cloud_API
     use GO_Zip;
 
     # Title
-    private $plugin_title;
+    public $plugin_title;
 
     # Slug
-    private $slug;
+    public $slug;
 
     # Cloud sites variable holder
-    private $cloud_sites_option;
+    public $cloud_sites_option;
 
     # Cloud directory variable
-    private $cloud_dir;
+    public $cloud_dir;
 
     # Cloud url path
-    private $cloud_url;
+    public $cloud_url;
+
+    # Plugins Repo
+    public $repo_folder;
 
     # Plugins
-    private $plugins;
+    public $plugins;
 
     # DB
-    private $db_name = 'subscribed_sites';
+    public $db_name;
 
-    function __construct( $title, $slug, $cloud_dir, $cloud_url, $cloud_sites_option, $plugins )
+    /**
+     * Initialize
+     * 
+     * @param string $title
+     * @param string $slug
+     * @param string $cloud_dir
+     * @param string $cloud_url
+     * @param string $cloud_sites_option
+     * @param array $plugins
+     * @param string $repo_folder
+     * @param string $db_name
+     */
+    function __construct( $title, $slug, $cloud_dir, $cloud_url, $cloud_sites_option, $plugins, $repo_folder, $db_name )
     {
         $this->plugin_title       = $title;
         $this->slug               = $slug;
@@ -35,6 +50,8 @@ class GO_Cloud_API
         $this->cloud_url          = $cloud_url;
         $this->cloud_sites_option = $cloud_sites_option;
         $this->plugins            = $plugins;
+        $this->repo_folder        = $repo_folder;
+        $this->db_name            = $db_name;
     }
 
 
@@ -57,7 +74,7 @@ class GO_Cloud_API
      * Register actions
      * @return void
      */
-    private function actions()
+    public function actions()
     {
         # Create database table
         add_action('admin_init', [$this, 'wp_table']);
@@ -217,7 +234,7 @@ class GO_Cloud_API
      * @param mixed $header
      * @return bool
      */
-    private function is_authorize( $header )
+    public function is_authorize( $header )
     {
         global $wpdb;
         
@@ -387,7 +404,7 @@ class GO_Cloud_API
      * @param string $referrer
      * @return array{ID: mixed, comment_status: mixed, guid: array|string, ping_status: mixed, post_content: mixed, post_excerpt: mixed, post_name: mixed, post_parent: mixed, post_title: mixed, post_type: mixed[]}
      */
-    private function get_acf_fields($ID, $host, $referrer)
+    public function get_acf_fields($ID, $host, $referrer)
     {
         $acf_fields = new WP_Query(array(
             'post_type'      => 'acf-field',
@@ -570,8 +587,8 @@ class GO_Cloud_API
         $kit = [];
         if ($templates->have_posts()): while($templates->have_posts()): $templates->the_post();
             $post_id = get_the_ID();       
-            $is_private = get_post_meta( $post_id, 'template-is-private', true );
-            if ($is_private == 'yes') continue;
+            $is_public = get_post_meta( $post_id, 'template-is-public', true );
+            if ($is_public == 'yes') continue;
             $kit[] = [
                 'ID'         => $post_id,
                 'title'      => get_the_title(),
@@ -619,7 +636,7 @@ class GO_Cloud_API
      * Get subscribed sites
      * @return void
      */
-    private function get_sites()
+    public function get_sites()
     {
         global $wpdb;        
         return $wpdb->get_results("SELECT * FROM `{$wpdb->prefix}{$this->db_name}`");
@@ -756,12 +773,12 @@ class GO_Cloud_API
         wp_nonce_field( basename( __FILE__ ), 'go_cloud_nonce' );
         $go_cloud_stored_meta = get_post_meta( $post->ID );
 
-        $status = isset( $go_cloud_stored_meta['template-is-private'] ) ? 'checked' : '';
+        $status = isset( $go_cloud_stored_meta['template-is-public'] ) ? 'checked' : '';
         ?>
 
         <p>
-            <label for="meta-text" class="go_cloud-row-title"><?php _e( 'Is private?', 'go-cloud-server' )?></label>
-            <input type="checkbox" name="template-is-private" id="template-is-private" value="yes" <?php echo $status ?> />
+            <label for="meta-text" class="go_cloud-row-title"><?php _e( 'Is public?', 'go-cloud-server' )?></label>
+            <input type="checkbox" name="template-is-public" id="template-is-public" value="yes" <?php echo $status ?> />
         </p>
 
         <?php
@@ -786,8 +803,8 @@ class GO_Cloud_API
         }
 
         // Checks for input and sanitizes/saves if needed
-        if( isset( $_POST[ 'template-is-private' ] ) ) {
-            update_post_meta( $post_id, 'template-is-private', sanitize_text_field( $_POST[ 'template-is-private' ] ) );
+        if( isset( $_POST[ 'template-is-public' ] ) ) {
+            update_post_meta( $post_id, 'template-is-public', sanitize_text_field( $_POST[ 'template-is-public' ] ) );
         }
     }
 

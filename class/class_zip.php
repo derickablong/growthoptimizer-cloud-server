@@ -12,7 +12,7 @@ trait GO_Zip
     public function generate() {        
         
         # Folder path
-        $folder_path = GROWTH_OPTIMIZER_PLUGINS_REPO;
+        $folder_path = $this->repo_folder;
 
         # If folder repo not exist, create
         if (!file_exists($folder_path))
