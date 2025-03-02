@@ -4,7 +4,7 @@ namespace GO_Cloud;
 
 class GO_Cloud_API
 {
-    use GO_Zip, Go_Meta;
+    use GO_Zip, Go_Meta, Go_Helper;
 
     # Title
     public $plugin_title;
@@ -184,7 +184,7 @@ class GO_Cloud_API
     {
         wp_register_style( 
             'go-cloud-server-css', 
-            $this->cloud_url . 'admin/css/style.css', 
+            $this->css('admin/css/style'), 
             array(), 
             uniqid(), 
             'all' 
@@ -192,7 +192,7 @@ class GO_Cloud_API
 
         wp_register_script( 
             'go-cloud-server-script', 
-            $this->cloud_url . 'admin/js/script.js', 
+            $this->script('admin/js/script'), 
             array( 'jquery' ), 
             uniqid(), 
             true
@@ -655,7 +655,10 @@ class GO_Cloud_API
         wp_enqueue_style('go-cloud-server-css');
         wp_enqueue_script('go-cloud-server-script');       
         $sites = $this->get_sites();
-        include $this->cloud_dir . '/admin/sites.php';
+
+        $this->template('/admin/sites', [
+            'sites' => $sites
+        ]);
     }
 
 
@@ -666,7 +669,9 @@ class GO_Cloud_API
      */
     public function site_item( $site )
     {
-        include $this->cloud_dir . '/admin/site-item.php';
+        $this->template('/admin/site-item', [
+            'site' => $site
+        ]);
     }
 
 
