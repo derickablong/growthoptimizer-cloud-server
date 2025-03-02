@@ -272,12 +272,13 @@ class GO_Cloud_API
     /**
      * Required plugins
      * @param WP_REST_Request $req
+     * @return mixed
      */
     public function api_required_plugins(\WP_REST_Request $req)
     {        
         $request = $req->get_headers();
         if ( !$this->is_authorize($request) ) {
-            return new WP_Error( '401', esc_html__( 'Not Authorized', 'go-cloud-server' ), array( 'status' => 401 ) );
+            return new \WP_Error( '401', esc_html__( 'Not Authorized', 'go-cloud-server' ), array( 'status' => 401 ) );
         }
         $requested_plugin = $request['plugin'][0];
         if (isset($requested_plugin))
@@ -316,14 +317,14 @@ class GO_Cloud_API
     /**
      * Custom fonts
      * @param WP_REST_Request $req
-     * @return array{ID: integer, edit_last: string, edit_lock: string, font_face: string, font_files: string, title: mixed[]|WP_Error}
+     * @return mixed
      */
     public function api_custom_fonts(\WP_REST_Request $req)
     {
         if ( !$this->is_authorize($req->get_headers()) ) {
-            return new WP_Error( '401', esc_html__( 'Not Authorized', 'go-cloud-server' ), array( 'status' => 401 ) );
+            return new \WP_Error( '401', esc_html__( 'Not Authorized', 'go-cloud-server' ), array( 'status' => 401 ) );
         }
-        $custom_fonts = new WP_Query(array(
+        $custom_fonts = new \WP_Query(array(
             'post_type'      => 'elementor_font',
             'post_status'    => 'publish',
             'posts_per_page' => -1            
@@ -349,14 +350,14 @@ class GO_Cloud_API
     /**
      * API for loop items
      * @param WP_REST_Request $req
-     * @return array{ID: mixed, content: mixed, postmeta: array, title: mixed[]|WP_Error}
+     * @return mixed
      */
     public function api_loop_items(\WP_REST_Request $req)
     {
         if ( !$this->is_authorize($req->get_headers()) ) {
-            return new WP_Error( '401', esc_html__( 'Not Authorized', 'go-cloud-server' ), array( 'status' => 401 ) );
+            return new \WP_Error( '401', esc_html__( 'Not Authorized', 'go-cloud-server' ), array( 'status' => 401 ) );
         }
-        $loop_items = new WP_Query(array(
+        $loop_items = new \WP_Query(array(
             'post_type'      => 'elementor_library',
             'post_status'    => 'publish',
             'posts_per_page' => -1,
@@ -406,7 +407,7 @@ class GO_Cloud_API
      */
     public function get_acf_fields($ID, $host, $referrer)
     {
-        $acf_fields = new WP_Query(array(
+        $acf_fields = new \WP_Query(array(
             'post_type'      => 'acf-field',
             'post_status'    => 'publish',
             'posts_per_page' => -1,
@@ -437,16 +438,16 @@ class GO_Cloud_API
     /**
      * API for ACF
      * @param WP_REST_Request $req
-     * @return array{ID: mixed, comment_status: mixed, guid: array|string, ping_status: mixed, post_content: mixed, post_excerpt: mixed, post_name: mixed, post_title: mixed, post_type: mixed, postmeta: array[]|WP_Error}
+     * @return mixed
      */
     public function api_acf( \WP_REST_Request $req )
     {
         if ( !$this->is_authorize($req->get_headers()) ) {
-            return new WP_Error( '401', esc_html__( 'Not Authorized', 'go-cloud-server' ), array( 'status' => 401 ) );
+            return new \WP_Error( '401', esc_html__( 'Not Authorized', 'go-cloud-server' ), array( 'status' => 401 ) );
         }
         $header    = $req->get_headers();
         $domain    = parse_url(home_url());
-        $acf_items = new WP_Query(array(
+        $acf_items = new \WP_Query(array(
             'post_type'      => 'acf-field-group',
             'post_status'    => 'publish',
             'posts_per_page' => -1
@@ -480,12 +481,12 @@ class GO_Cloud_API
     /**
      * API for Gravity Forms
      * @param WP_REST_Request $req
-     * @return array<array|array{is_active: mixed, is_trash: mixed, meta: array, revisions: array, title: mixed>|WP_Error}
+     * @return mixed
      */
     public function api_gforms(\WP_REST_Request $req)
     {
         if ( !$this->is_authorize($req->get_headers()) ) {
-            return new WP_Error( '401', esc_html__( 'Not Authorized', 'go-cloud-server' ), array( 'status' => 401 ) );
+            return new \WP_Error( '401', esc_html__( 'Not Authorized', 'go-cloud-server' ), array( 'status' => 401 ) );
         }
         global $wpdb;
 
@@ -559,16 +560,16 @@ class GO_Cloud_API
     /**
      * API for templates
      * @param WP_REST_Request $req
-     * @return array{ID: mixed, categories: mixed, data: mixed, image: mixed, title: mixed[]}
+     * @return mixed
      */
     public function api_template_kit( \WP_REST_Request $req )
     {
         
         if ( !$this->is_authorize($req->get_headers()) ) {
-            return new WP_Error( '401', esc_html__( 'Not Authorized', 'go-cloud-server' ), array( 'status' => 401 ) );
+            return new \WP_Error( '401', esc_html__( 'Not Authorized', 'go-cloud-server' ), array( 'status' => 401 ) );
         }
 
-        $templates = new WP_Query(array(
+        $templates = new \WP_Query(array(
             'post_type'      => 'elementor_library',
             'post_status'    => 'publish',
             'posts_per_page' => -1,
@@ -605,11 +606,12 @@ class GO_Cloud_API
     /**
      * API for template categories
      * @param WP_REST_Request $req
+     * @return mixed
      */
     public function api_template_categories( \WP_REST_Request $req )
     {
         if ( !$this->is_authorize($req->get_headers()) ) {
-            return new WP_Error( '401', esc_html__( 'Not Authorized', 'go-cloud-server' ), array( 'status' => 401 ) );
+            return new \WP_Error( '401', esc_html__( 'Not Authorized', 'go-cloud-server' ), array( 'status' => 401 ) );
         }
         return get_terms(array(
             'taxonomy'   => 'elementor_library_category',
@@ -621,11 +623,12 @@ class GO_Cloud_API
     /**
      * API for global settings
      * @param WP_REST_Request $req
+     * @return mixed
      */
     public function api_global_settings( \WP_REST_Request $req )
     {
         if ( !$this->is_authorize($req->get_headers()) ) {
-            return new WP_Error( '401', esc_html__( 'Not Authorized', 'go-cloud-server' ), array( 'status' => 401 ) );
+            return new \WP_Error( '401', esc_html__( 'Not Authorized', 'go-cloud-server' ), array( 'status' => 401 ) );
         }
         $elementor_active_kit = get_option('elementor_active_kit');
         return get_post_meta( $elementor_active_kit, '_elementor_page_settings' );
