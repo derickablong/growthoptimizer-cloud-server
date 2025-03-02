@@ -58,17 +58,17 @@ trait GO_Meta
      */
     public function go_cloud_metabox_save($post_id)
     {
-        // Checks save status
+        # Checks save status
         $is_autosave = wp_is_post_autosave( $post_id );
         $is_revision = wp_is_post_revision( $post_id );
         $is_valid_nonce = ( isset( $_POST[ 'go_cloud_nonce' ] ) && wp_verify_nonce( $_POST[ 'go_cloud_nonce' ], basename( __FILE__ ) ) ) ? 'true' : 'false';
 
-        // Exits script depending on save status
+        # Exits script depending on save status
         if ( $is_autosave || $is_revision || !$is_valid_nonce ) {
             return;
         }
 
-        // Checks for input and sanitizes/saves if needed
+        # Checks for input and sanitizes/saves if needed
         if( isset( $_POST[ 'template-is-public' ] ) ) {
             update_post_meta( $post_id, 'template-is-public', sanitize_text_field( $_POST[ 'template-is-public' ] ) );
         }
