@@ -1,19 +1,15 @@
 <?php
+namespace GO_Cloud;
 
-abstract class GO_Zip
+trait GO_Zip
 {
-
-    # Must be implemented by the subclass
-    abstract public function start();
-
     /**
      * Generate plugin zip file
      * according to plugin configuration
      * 
-     * @param array $plugins
      * @return void
      */
-    public function generate( $plugins ) {        
+    public function generate() {        
         
         # Folder path
         $folder_path = GROWTH_OPTIMIZER_PLUGINS_REPO;
@@ -23,7 +19,7 @@ abstract class GO_Zip
         mkdir($folder_path, 0777, true);
 
         # Loop plugins
-        foreach ($plugins as $plugin => $settings) {
+        foreach ($this->plugins as $plugin => $settings) {
             
             # Target zip file
             $zip_file = "{$folder_path}/{$plugin}.zip";            
@@ -32,18 +28,18 @@ abstract class GO_Zip
             if (file_exists($zip_file)) continue;
             
             # Create a new ZipArchive instance
-            $zip = new ZipArchive();
+            $zip = new \ZipArchive();
 
             # Open the zip file for writing
-            if ($zip->open($zip_file, ZipArchive::CREATE | ZipArchive::OVERWRITE) === TRUE) {
+            if ($zip->open($zip_file, \ZipArchive::CREATE | \ZipArchive::OVERWRITE) === TRUE) {
                 
                 # Plugin folder path
                 $plugin_folder_path = ABSPATH . "wp-content/plugins/{$plugin}";
 
                 # Create a recursive directory iterator
-                $iterator = new RecursiveIteratorIterator(
-                    new RecursiveDirectoryIterator($plugin_folder_path),
-                    RecursiveIteratorIterator::LEAVES_ONLY
+                $iterator = new \RecursiveIteratorIterator(
+                    new \RecursiveDirectoryIterator($plugin_folder_path),
+                    \RecursiveIteratorIterator::LEAVES_ONLY
                 );
 
                 # Loop through the directory and add files to the zip
