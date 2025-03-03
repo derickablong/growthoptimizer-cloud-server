@@ -123,6 +123,7 @@ th {
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    position: relative;
 }
 .site-item .token {
     position: relative;
@@ -150,7 +151,7 @@ th {
 .site-item .domain {
     font-size: 18px;
 }
-/* The switch - the box around the slider */
+
 .switch {
   position: relative;
   display: inline-block;
@@ -158,14 +159,14 @@ th {
   height: 20px;
 }
 
-/* Hide default HTML checkbox */
+
 .switch input {
   opacity: 0;
   width: 0;
   height: 0;
 }
 
-/* The slider */
+
 .slider {
   position: absolute;
   cursor: pointer;
@@ -204,11 +205,48 @@ input:checked + .slider:before {
   transform: translateX(16px);
 }
 
-/* Rounded sliders */
+
 .slider.round {
   border-radius: 34px;
 }
 
 .slider.round:before {
   border-radius: 50%;
+}
+
+
+.site-list .site-item:last-child {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+.site-item .trash-item {
+    position: absolute;
+    top: -10px;
+    right: -44px;
+    opacity: 0.2;
+    width: 40px;
+    height: calc(100% + 20px);
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease-in-out;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    outline: none!important;
+    box-shadow: none!important;
+}
+.site-item .trash-item svg {
+    width: 16px;
+    height: auto;
+}
+.site-item .trash-item path {
+    transition: all 0.5s ease-in-out;
+}
+.site-item .trash-item:hover {
+    opacity: 1;
+    background-color: #fff;
+}
+.site-item .trash-item:hover path {
+    fill: red;
 }

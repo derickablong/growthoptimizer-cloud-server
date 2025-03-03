@@ -53,6 +53,13 @@
                 '.site-item .token',
                 GO_Cloud_Server._copy_to_clipboard
             );
+
+            // Trash item
+            GO_Cloud_Server.doc.on(
+                'click',
+                '.trash-item',
+                GO_Cloud_Server._trash
+            );
         },
 
         _server: function(data, callback) {
@@ -155,6 +162,26 @@
             document.execCommand("copy");
             document.body.removeChild(aux);
             alert('Access token copied.');
+        },
+
+        _trash: function(e) {
+            e.preventDefault();
+            const site = $(this);
+            if (confirm('You sure to remove ' + site.data('domain')+'?')) {
+                GO_Cloud_Server.is_item = false;
+                GO_Cloud_Server._server({
+                    action: 'go_remove_site',
+                    site  : site.data('site')
+                }, function(response) {
+                    console.log(response);   
+                    
+                    GO_Cloud_Server.input_domain.val('');
+                    GO_Cloud_Server._generate_token(null);
+                    GO_Cloud_Server._subscribed_sites();
+                    GO_Cloud_Server._after();
+                    GO_Cloud_Server._success('Site removed.');
+                });
+            }
         },
 
         _success: function(message) {

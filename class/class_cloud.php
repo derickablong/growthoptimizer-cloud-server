@@ -95,6 +95,9 @@ class GO_Cloud_API
         # Ajax add new site
         add_action('wp_ajax_go_add_new_site', [$this, 'add_new_site']);
 
+        # Ajax remove site
+        add_action('wp_ajax_go_remove_site', [$this, 'remove_site']);
+
         # Load subscribed sites
         add_action('wp_ajax_go_subscribed_sites', [$this, 'subscribed_sites']);
 

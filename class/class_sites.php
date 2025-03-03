@@ -134,6 +134,30 @@ trait GO_Sites
         wp_die();
     }
 
+
+    /**
+     * Ajax remove site
+     * @return void
+     */
+    public function remove_site()
+    {
+        global $wpdb;
+
+        $site = $_POST['site'];
+
+        $deleted = $wpdb->delete(
+            "{$wpdb->prefix}{$this->db_name}",
+            ['id' => $site],
+            ['%d']
+        );
+
+        wp_send_json([
+            'success' => $deleted
+        ]);
+        wp_die();
+    }
+
+
     /**
      * Site status change
      * @return void
