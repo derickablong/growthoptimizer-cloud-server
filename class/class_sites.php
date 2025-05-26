@@ -117,19 +117,22 @@ trait GO_Sites
     {
         global $wpdb;
 
-        $domain = parse_url($_POST['domain']);
+        $host = strpos($_POST['domain'], 'http') !== FALSE ? parse_url($_POST['domain']) : $_POST['domain'];
+        $domain = is_array($host) ? $host['host'] : $host;
         $token  = $_POST['token'];
 
         $insert = $wpdb->insert(
             "{$wpdb->prefix}{$this->db_name}",
             [
-                'domain' => $domain['host'],
-                'token'  => $token
+                'domain' => $domain,
+                'token'  => $token,
+                'status' => 'active'
             ]
         );
 
         wp_send_json([
-            'success' => !$insert
+            'success' => $insert,
+            'domain' => $domain
         ]);
         wp_die();
     }

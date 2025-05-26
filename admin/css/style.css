@@ -150,6 +150,7 @@ th {
 }
 .site-item .domain {
     font-size: 18px;
+    word-break: break-all;
 }
 
 .switch {
