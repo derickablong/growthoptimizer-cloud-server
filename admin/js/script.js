@@ -161,7 +161,7 @@
             aux.select();            
             document.execCommand("copy");
             document.body.removeChild(aux);
-            alert('Access token copied.');
+            alert('API token copied.');
         },
 
         _trash: function(e) {

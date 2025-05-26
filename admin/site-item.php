@@ -3,7 +3,7 @@
         <div class="domain"><?php echo $site->domain ?></div>
     </div>
     <div class="col">
-        <div class="token"><?php echo $site->token ?></div>
+        <div class="token" title="Click to copy"><?php echo $site->token ?></div>
     </div>
     <div class="action">
         <label class="switch">
