@@ -9,7 +9,7 @@
         scope_list  : null,
         scope_item  : null,
 
-        init: function() {
+        _init: function() {
             GO_Cloud_Server._action();
             GO_Cloud_Server._subscribed_sites();
         },
@@ -37,7 +37,7 @@
             GO_Cloud_Server.doc.on(
                 'click',
                 '.add-new-site',
-                GO_Cloud_Server.add
+                GO_Cloud_Server._add
             );
 
             // Site status change
@@ -83,7 +83,7 @@
             GO_Cloud_Server.input_token.val( token );
         },
 
-        add_site: function() {
+        _add_site: function() {
             GO_Cloud_Server.is_item = false;
             GO_Cloud_Server._server({
                 action: 'go_add_new_site',
@@ -100,13 +100,13 @@
             });
         },
 
-        add: function(e) {
+        _add: function(e) {
             e.preventDefault();   
             if (GO_Cloud_Server.input_domain.val() === '') {
                 alert('Domain is requried!');
                 GO_Cloud_Server.input_domain.focus();
             } else {
-                GO_Cloud_Server.add_site();
+                GO_Cloud_Server._add_site();
             }           
         },
 
@@ -204,5 +204,5 @@
             `);
         }
     }
-    GO_Cloud_Server.init();
+    GO_Cloud_Server._init();
 })(jQuery)
