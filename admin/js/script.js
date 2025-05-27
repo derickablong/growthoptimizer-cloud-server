@@ -83,8 +83,7 @@
             GO_Cloud_Server.input_token.val( token );
         },
 
-        add: function(e) {
-            e.preventDefault();   
+        add_site: function() {
             GO_Cloud_Server.is_item = false;
             GO_Cloud_Server._server({
                 action: 'go_add_new_site',
@@ -98,7 +97,17 @@
                 GO_Cloud_Server._subscribed_sites();
                 GO_Cloud_Server._after();
                 GO_Cloud_Server._success('New site added.');
-            });         
+            });
+        },
+
+        add: function(e) {
+            e.preventDefault();   
+            if (GO_Cloud_Server.input_domain.val() === '') {
+                alert('Domain is requried!');
+                GO_Cloud_Server.input_domain.focus();
+            } else {
+                GO_Cloud_Server.add_site();
+            }           
         },
 
         _subscribed_sites: function() {
